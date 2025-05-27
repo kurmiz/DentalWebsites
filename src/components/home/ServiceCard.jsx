@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Calendar, Star } from 'lucide-react';
 import { Button } from '../ui/Button';
@@ -11,8 +11,8 @@ const ServiceCard = ({ icon, title, description, price, image, alt, delay = 0, f
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay }}
-      className={`group relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 dark:border-gray-700 hover:border-primary-200 dark:hover:border-primary-700 ${
-        featured ? 'ring-2 ring-primary-500 ring-opacity-50' : ''
+      className={`group relative card card-hover card-interactive overflow-hidden ${
+        featured ? 'ring-2 ring-primary-500 dark:ring-primary-400 ring-opacity-50 dark:ring-opacity-60' : ''
       }`}
     >
       {/* Featured Badge */}
@@ -80,7 +80,7 @@ const ServiceCard = ({ icon, title, description, price, image, alt, delay = 0, f
           <Button
             variant="outline"
             size="sm"
-            className="flex-1 group/btn border-gray-200 hover:border-primary-500 text-gray-700 hover:text-primary-600"
+            className="flex-1 group/btn interactive-glow-cool"
           >
             Learn More
             <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
@@ -88,7 +88,7 @@ const ServiceCard = ({ icon, title, description, price, image, alt, delay = 0, f
           <Button
             variant="primary"
             size="sm"
-            className="flex-1"
+            className="flex-1 interactive-glow"
           >
             <Calendar className="mr-2 h-4 w-4" />
             Book Now

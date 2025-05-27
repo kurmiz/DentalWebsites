@@ -40,7 +40,7 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800">
+    <nav className="glass-navbar shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-18">
           {/* Logo */}
@@ -85,18 +85,23 @@ const Navbar = () => {
 
           {/* Right side buttons */}
           <div className="hidden md:flex items-center space-x-3">
-            {/* Theme toggle */}
+            {/* Enhanced Theme toggle */}
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="w-10 h-10 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300"
+              className="w-10 h-10 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 interactive-glow group relative overflow-hidden"
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
             >
-              {theme === 'dark' ? (
-                <Sun className="h-5 w-5 text-yellow-500" />
-              ) : (
-                <Moon className="h-5 w-5 text-gray-600" />
-              )}
+              <div className="relative z-10">
+                {theme === 'dark' ? (
+                  <Sun className="h-5 w-5 text-yellow-500 group-hover:text-yellow-400 transition-colors duration-300" />
+                ) : (
+                  <Moon className="h-5 w-5 text-gray-600 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300" />
+                )}
+              </div>
+              {/* Subtle background animation */}
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-orange-400/10 dark:from-blue-400/10 dark:to-purple-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
             </Button>
 
             {/* User menu or auth buttons */}
@@ -220,17 +225,17 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700"
+            className="md:hidden glass-strong border-t border-gray-200/50 dark:border-gray-700/50"
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`block px-3 py-2 rounded-md text-base font-medium ${
+                  className={`block px-3 py-2 rounded-xl text-base font-medium transition-all duration-300 ${
                     isActive(item.href)
-                      ? 'text-primary-600 bg-primary-50 dark:bg-primary-900/20'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
+                      ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 shadow-sm'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50'
                   }`}
                   onClick={() => setIsOpen(false)}
                 >

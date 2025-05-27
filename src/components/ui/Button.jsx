@@ -14,13 +14,13 @@ const Button = React.forwardRef(({
   const Comp = asChild ? motion.div : motion.button;
 
   const variants = {
-    primary: "bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white shadow-lg hover:shadow-xl border-0 focus:ring-primary-500",
-    secondary: "bg-white text-primary-600 border-2 border-primary-600 hover:bg-primary-50 hover:border-primary-700 shadow-md hover:shadow-lg focus:ring-primary-500",
-    outline: "border-2 border-primary-500 text-primary-600 hover:bg-primary-600 hover:text-white hover:border-primary-600 focus:ring-primary-500 bg-transparent",
-    ghost: "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:ring-gray-500",
-    destructive: "bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-lg hover:shadow-xl focus:ring-red-500",
-    success: "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white shadow-lg hover:shadow-xl focus:ring-green-500",
-    warning: "bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white shadow-lg hover:shadow-xl focus:ring-yellow-500",
+    primary: "bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white shadow-lg hover:shadow-xl dark:shadow-primary-500/25 dark:hover:shadow-primary-500/40 border-0 focus:ring-primary-500 dark:focus:ring-primary-400",
+    secondary: "bg-white dark:bg-gray-800 text-primary-600 dark:text-primary-400 border-2 border-primary-600 dark:border-primary-500 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:border-primary-700 dark:hover:border-primary-400 shadow-md hover:shadow-lg dark:shadow-gray-900/50 focus:ring-primary-500 dark:focus:ring-primary-400",
+    outline: "border-2 border-primary-500 dark:border-primary-400 text-primary-600 dark:text-primary-400 hover:bg-primary-600 dark:hover:bg-primary-500 hover:text-white hover:border-primary-600 dark:hover:border-primary-500 focus:ring-primary-500 dark:focus:ring-primary-400 bg-transparent",
+    ghost: "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:ring-gray-500 dark:focus:ring-gray-400",
+    destructive: "bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 dark:from-red-600 dark:to-red-700 dark:hover:from-red-700 dark:hover:to-red-800 text-white shadow-lg hover:shadow-xl dark:shadow-red-500/25 dark:hover:shadow-red-500/40 focus:ring-red-500 dark:focus:ring-red-400",
+    success: "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 dark:from-green-600 dark:to-green-700 dark:hover:from-green-700 dark:hover:to-green-800 text-white shadow-lg hover:shadow-xl dark:shadow-green-500/25 dark:hover:shadow-green-500/40 focus:ring-green-500 dark:focus:ring-green-400",
+    warning: "bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 dark:from-yellow-600 dark:to-orange-600 dark:hover:from-yellow-700 dark:hover:to-orange-700 text-white shadow-lg hover:shadow-xl dark:shadow-yellow-500/25 dark:hover:shadow-yellow-500/40 focus:ring-yellow-500 dark:focus:ring-yellow-400",
   };
 
   const sizes = {

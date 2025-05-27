@@ -17,6 +17,7 @@ import { Button } from '../components/ui/Button';
 import ServiceCard from '../components/home/ServiceCard';
 import TestimonialCard from '../components/home/TestimonialCard';
 import StatsSection from '../components/home/StatsSection';
+import CredentialsSection from '../components/home/CredentialsSection';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -38,7 +39,7 @@ const Home = () => {
       title: 'Dental Checkup',
       description: 'Comprehensive oral health examination and professional cleaning to maintain optimal dental health',
       price: 'From $80',
-      image: 'https://picsum.photos/400/300?random=1',
+      image: certificateImage,
       alt: 'Professional dental checkup examination with dentist using modern dental tools and equipment',
       featured: true
     },
@@ -47,7 +48,7 @@ const Home = () => {
       title: 'Dental X-ray (RVG)',
       description: 'Advanced digital radiography for accurate diagnosis and treatment planning',
       price: 'From $50',
-      image: 'https://picsum.photos/400/300?random=2',
+      image: patientImage,
       alt: 'Digital dental X-ray machine and radiography equipment for accurate dental diagnosis'
     },
     {
@@ -90,7 +91,7 @@ const Home = () => {
       name: 'Sarah Johnson',
       rating: 5,
       comment: 'Excellent service! Dr. Subha and the team made me feel comfortable throughout my treatment. The modern facility and professional approach exceeded my expectations.',
-      avatar: 'https://picsum.photos/150/150?random=7',
+      avatar: patientImage,
       alt: 'Sarah Johnson - Happy patient testimonial photo',
       verified: true,
       location: 'Kathmandu, Nepal'
@@ -99,7 +100,7 @@ const Home = () => {
       name: 'Michael Chen',
       rating: 5,
       comment: 'Professional, clean, and modern facility. Highly recommend for all dental needs. The staff is incredibly knowledgeable and caring.',
-      avatar: 'https://picsum.photos/150/150?random=8',
+      avatar: patientImage,
       alt: 'Michael Chen - Satisfied patient testimonial photo',
       verified: true,
       location: 'Lalitpur, Nepal'
@@ -108,7 +109,7 @@ const Home = () => {
       name: 'Emily Davis',
       rating: 5,
       comment: 'The best dental experience I\'ve ever had. Pain-free procedures and caring staff. They truly care about patient comfort and satisfaction.',
-      avatar: 'https://picsum.photos/150/150?random=9',
+      avatar: patientImage,
       alt: 'Emily Davis - Delighted patient testimonial photo',
       verified: true,
       location: 'Bhaktapur, Nepal'
@@ -332,6 +333,9 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Credentials Section */}
+      <CredentialsSection />
 
       {/* Why Choose Us Section */}
       <section className="py-24 bg-white dark:bg-gray-900 relative overflow-hidden">
