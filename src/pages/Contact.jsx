@@ -4,11 +4,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import toast from 'react-hot-toast';
-import { 
-  MapPin, 
-  Phone, 
-  Mail, 
-  Clock, 
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
   Send,
   Calendar,
   User,
@@ -50,7 +50,7 @@ const Contact = () => {
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       console.log('Form data:', data);
       toast.success('Your appointment request has been sent successfully! We will contact you soon.');
       reset();
@@ -108,7 +108,7 @@ const Contact = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             >
-              Ready to schedule your appointment? Get in touch with us today. 
+              Ready to schedule your appointment? Get in touch with us today.
               We're here to help you achieve your best smile.
             </motion.p>
           </div>
@@ -266,7 +266,7 @@ const Contact = () => {
                   Get in Touch
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  We're here to help you with all your dental needs. Contact us through 
+                  We're here to help you with all your dental needs. Contact us through
                   any of the methods below or visit our clinic directly.
                 </p>
               </div>
@@ -291,7 +291,7 @@ const Contact = () => {
                         {info.details.map((detail, idx) => (
                           <p key={idx} className="text-gray-600 dark:text-gray-400">
                             {info.link && idx === 0 ? (
-                              <a 
+                              <a
                                 href={info.link}
                                 className="hover:text-primary-600 transition-colors duration-200"
                               >
@@ -308,14 +308,22 @@ const Contact = () => {
                 ))}
               </div>
 
-              {/* Map Placeholder */}
-              <div className="bg-gray-200 dark:bg-gray-700 rounded-xl h-64 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="h-12 w-12 text-gray-400 mx-auto mb-2" />
-                  <p className="text-gray-500 dark:text-gray-400">
-                    Interactive Map Coming Soon
-                  </p>
-                  <p className="text-sm text-gray-400 dark:text-gray-500">
+              {/* Clinic Image */}
+              <div className="relative rounded-xl overflow-hidden shadow-lg">
+                <img
+                  src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&h=300&fit=crop&crop=center&auto=format&q=80"
+                  alt="Subha Dental Care clinic exterior and reception area welcoming patients in Buddhachowk, Kathmandu"
+                  className="w-full h-64 object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                <div className="absolute bottom-4 left-4 text-white">
+                  <div className="flex items-center space-x-2 mb-2">
+                    <MapPin className="h-5 w-5" />
+                    <span className="font-semibold">Our Clinic Location</span>
+                  </div>
+                  <p className="text-sm opacity-90">
                     Buddhachowk, Kathmandu, Nepal
                   </p>
                 </div>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Menu, 
-  X, 
-  Sun, 
-  Moon, 
-  User, 
+import {
+  Menu,
+  X,
+  Sun,
+  Moon,
+  User,
   LogOut,
   Calendar,
   Settings
@@ -27,6 +27,7 @@ const Navbar = () => {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
+    { name: 'Book Appointment', href: '/book-appointment' },
     { name: 'Contact', href: '/contact' },
   ];
 
@@ -39,51 +40,62 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-lg sticky top-0 z-50">
+    <nav className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between h-18">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">S</span>
+            <Link to="/" className="flex items-center space-x-3 group">
+              <div className="w-10 h-10 bg-gradient-to-r from-primary-600 to-blue-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                <span className="text-white font-bold text-xl">S</span>
               </div>
-              <span className="text-xl font-bold text-gray-900 dark:text-white">
-                Subha Dental Care
-              </span>
+              <div className="hidden sm:block">
+                <span className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+                  Subha Dental Care
+                </span>
+                <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                  Professional Dental Care
+                </div>
+              </div>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-2">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 group ${
                   isActive(item.href)
-                    ? 'text-primary-600 bg-primary-50 dark:bg-primary-900/20'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
+                    ? 'text-primary-600 bg-primary-50 dark:bg-primary-900/30 shadow-sm'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50'
                 }`}
               >
                 {item.name}
+                {isActive(item.href) && (
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary-600 rounded-full"></div>
+                )}
+                {!isActive(item.href) && (
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-primary-600 rounded-full group-hover:w-1 transition-all duration-300"></div>
+                )}
               </Link>
             ))}
           </div>
 
           {/* Right side buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3">
             {/* Theme toggle */}
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="w-9 h-9"
+              className="w-10 h-10 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300"
             >
               {theme === 'dark' ? (
-                <Sun className="h-4 w-4" />
+                <Sun className="h-5 w-5 text-yellow-500" />
               ) : (
-                <Moon className="h-4 w-4" />
+                <Moon className="h-5 w-5 text-gray-600" />
               )}
             </Button>
 
@@ -147,12 +159,25 @@ const Navbar = () => {
                 </AnimatePresence>
               </div>
             ) : (
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-3">
                 <Link to="/login">
-                  <Button variant="ghost">Login</Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium"
+                  >
+                    <User className="mr-2 h-4 w-4" />
+                    Login
+                  </Button>
                 </Link>
                 <Link to="/signup">
-                  <Button>Sign Up</Button>
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    className="shadow-lg hover:shadow-xl"
+                  >
+                    Sign Up
+                  </Button>
                 </Link>
               </div>
             )}
@@ -212,7 +237,7 @@ const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
-              
+
               {user ? (
                 <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
                   <div className="flex items-center px-3 py-2">
@@ -243,20 +268,15 @@ const Navbar = () => {
                   </button>
                 </div>
               ) : (
-                <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4 space-y-2">
-                  <Link
-                    to="/login"
-                    className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Login
+                <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4 space-y-3 px-3">
+                  <Link to="/login" onClick={() => setIsOpen(false)}>
+                    <Button variant="outline" className="w-full border-2 border-primary-500 text-primary-600 hover:bg-primary-500 hover:text-white font-medium justify-center">
+                      <User className="mr-2 h-4 w-4" />
+                      Login
+                    </Button>
                   </Link>
-                  <Link
-                    to="/signup"
-                    className="block px-3 py-2 text-base font-medium text-primary-600"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Sign Up
+                  <Link to="/signup" onClick={() => setIsOpen(false)}>
+                    <Button className="w-full justify-center">Sign Up</Button>
                   </Link>
                 </div>
               )}
