@@ -42,15 +42,15 @@ const Navbar = () => {
   return (
     <nav className="glass-navbar shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-18">
-          {/* Logo */}
-          <div className="flex items-center">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo Section */}
+          <div className="flex items-center flex-shrink-0">
             <Link to="/" className="flex items-center space-x-3 group">
               <div className="w-10 h-10 bg-gradient-to-r from-primary-600 to-blue-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
                 <span className="text-white font-bold text-xl">S</span>
               </div>
               <div className="hidden sm:block">
-                <span className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+                <span className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
                   Subha Dental Care
                 </span>
                 <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">
@@ -60,64 +60,62 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-2">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 group ${
-                  isActive(item.href)
-                    ? 'text-primary-600 bg-primary-50 dark:bg-primary-900/30 shadow-sm'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50'
-                }`}
-              >
-                {item.name}
-                {isActive(item.href) && (
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary-600 rounded-full"></div>
-                )}
-                {!isActive(item.href) && (
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-primary-600 rounded-full group-hover:w-1 transition-all duration-300"></div>
-                )}
-              </Link>
-            ))}
+          {/* Center Navigation */}
+          <div className="hidden lg:flex items-center justify-center flex-1 px-8">
+            <div className="flex items-center space-x-1">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`relative px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 group ${
+                    isActive(item.href)
+                      ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                  }`}
+                >
+                  {item.name}
+                  {isActive(item.href) && (
+                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary-600 rounded-full"></div>
+                  )}
+                  {!isActive(item.href) && (
+                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-primary-600 rounded-full group-hover:w-1 transition-all duration-300"></div>
+                  )}
+                </Link>
+              ))}
+            </div>
           </div>
 
-          {/* Right side buttons */}
-          <div className="hidden md:flex items-center space-x-3">
-            {/* Enhanced Theme toggle */}
+          {/* Right Side Actions */}
+          <div className="flex items-center space-x-2 flex-shrink-0">
+            {/* Theme Toggle */}
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="w-10 h-10 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 interactive-glow group relative overflow-hidden"
+              className="w-9 h-9 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 group"
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
             >
-              <div className="relative z-10">
-                {theme === 'dark' ? (
-                  <Sun className="h-5 w-5 text-yellow-500 group-hover:text-yellow-400 transition-colors duration-300" />
-                ) : (
-                  <Moon className="h-5 w-5 text-gray-600 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300" />
-                )}
-              </div>
-              {/* Subtle background animation */}
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-orange-400/10 dark:from-blue-400/10 dark:to-purple-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+              {theme === 'dark' ? (
+                <Sun className="h-4 w-4 text-yellow-500 group-hover:text-yellow-400 transition-colors duration-300" />
+              ) : (
+                <Moon className="h-4 w-4 text-gray-600 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300" />
+              )}
             </Button>
 
-            {/* User menu or auth buttons */}
+            {/* Authentication Buttons */}
             {user ? (
               <div className="relative">
                 <Button
                   variant="ghost"
                   onClick={() => setShowUserMenu(!showUserMenu)}
-                  className="flex items-center space-x-2"
+                  className="flex items-center space-x-2 px-3 py-2 rounded-lg"
                 >
                   <img
                     src={user.avatar}
                     alt={user.name}
-                    className="w-8 h-8 rounded-full"
+                    className="w-7 h-7 rounded-full"
                   />
-                  <span className="text-sm font-medium">{user.name}</span>
+                  <span className="text-sm font-medium hidden xl:block">{user.name}</span>
                 </Button>
 
                 <AnimatePresence>
@@ -164,14 +162,14 @@ const Navbar = () => {
                 </AnimatePresence>
               </div>
             ) : (
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-2">
                 <Link to="/login">
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium"
+                    className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium px-3 py-2 rounded-lg"
                   >
-                    <User className="mr-2 h-4 w-4" />
+                    <User className="mr-1.5 h-4 w-4" />
                     Login
                   </Button>
                 </Link>
@@ -179,7 +177,7 @@ const Navbar = () => {
                   <Button
                     variant="primary"
                     size="sm"
-                    className="shadow-lg hover:shadow-xl"
+                    className="px-4 py-2 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-300"
                   >
                     Sign Up
                   </Button>
@@ -188,13 +186,30 @@ const Navbar = () => {
             )}
           </div>
 
+          {/* Medium Screen Navigation (md to lg) */}
+          <div className="hidden md:flex lg:hidden items-center space-x-1">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={`relative px-2 py-2 rounded-lg text-xs font-medium transition-all duration-300 group ${
+                  isActive(item.href)
+                    ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
+          <div className="md:hidden flex items-center space-x-1">
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="w-9 h-9"
+              className="w-8 h-8 rounded-lg"
             >
               {theme === 'dark' ? (
                 <Sun className="h-4 w-4" />
@@ -206,12 +221,12 @@ const Navbar = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
-              className="w-9 h-9"
+              className="w-8 h-8 rounded-lg"
             >
               {isOpen ? (
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu className="h-4 w-4" />
               )}
             </Button>
           </div>

@@ -10,6 +10,7 @@ import {
   CheckCircle
 } from 'lucide-react';
 import AOS from 'aos';
+import { DentalCareVideo } from '../components/ui/VideoPlayer';
 
 const About = () => {
   useEffect(() => {
@@ -111,13 +112,8 @@ const About = () => {
         <div className="container-max">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div data-aos="fade-right">
-              <img
-                src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=600&h=400&fit=crop&crop=center&auto=format&q=80"
-                alt="Modern dental clinic interior at Subha Dental Care featuring advanced equipment and comfortable patient treatment areas"
-                className="rounded-2xl shadow-lg w-full h-auto"
-                loading="lazy"
-                decoding="async"
-              />
+              {/* Professional Dental Care Video */}
+              <DentalCareVideo />
             </div>
 
             <div data-aos="fade-left">

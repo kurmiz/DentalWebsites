@@ -12,6 +12,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
+import { LoadingGif, SuccessGif } from '../components/ui/GifPlayer';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -23,6 +24,7 @@ const BookAppointment = () => {
   const [selectedDoctor, setSelectedDoctor] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const services = [
     { id: 'checkup', name: 'Dental Checkup', duration: '45 min', price: '$80' },
@@ -83,6 +85,7 @@ const BookAppointment = () => {
   };
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     const appointmentData = {
       ...data,
       service: selectedService,
@@ -91,10 +94,16 @@ const BookAppointment = () => {
       time: selectedTime,
     };
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    toast.success('Appointment booked successfully!');
-    setCurrentStep(5); // Success step
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      toast.success('Appointment booked successfully!');
+      setCurrentStep(5); // Success step
+    } catch (error) {
+      toast.error('Failed to book appointment. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const generateDates = () => {
@@ -423,39 +432,94 @@ const BookAppointment = () => {
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full" size="lg">
-                  Book Appointment
+                <Button
+                  type="submit"
+                  className="w-full"
+                  size="lg"
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Booking...' : 'Book Appointment'}
                 </Button>
               </form>
             </div>
           )}
 
-          {/* Step 5: Success */}
-          {currentStep === 5 && (
+          {/* Loading State */}
+          {isLoading && (
             <div className="text-center py-12">
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <CheckCircle className="h-12 w-12 text-green-600" />
+              <div className="mb-8">
+                <LoadingGif size="large" className="mx-auto" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                Booking Your Appointment...
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400">
+                Please wait while we process your request. This may take a few moments.
+              </p>
+              <div className="mt-6 flex justify-center">
+                <div className="flex space-x-2">
+                  <div className="w-2 h-2 bg-primary-600 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-primary-600 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                  <div className="w-2 h-2 bg-primary-600 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Step 5: Success */}
+          {currentStep === 5 && !isLoading && (
+            <div className="text-center py-12">
+              <div className="mb-8">
+                <SuccessGif size="large" className="mx-auto" />
               </div>
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                Appointment Booked Successfully!
+                Appointment Booked Successfully! 🎉
               </h2>
               <p className="text-gray-600 dark:text-gray-400 mb-8">
                 We've sent a confirmation email with all the details.
-                We look forward to seeing you!
+                We look forward to seeing you and helping you achieve your best smile!
               </p>
+
+              {/* Appointment Details Card */}
+              <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-700 rounded-xl p-6 mb-8 max-w-md mx-auto">
+                <h3 className="text-lg font-semibold text-green-800 dark:text-green-300 mb-4">
+                  Your Appointment Details
+                </h3>
+                <div className="space-y-2 text-sm text-green-700 dark:text-green-400">
+                  <div className="flex justify-between">
+                    <span>Service:</span>
+                    <span className="font-medium">{services.find(s => s.id === selectedService)?.name}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Doctor:</span>
+                    <span className="font-medium">{doctors.find(d => d.id === selectedDoctor)?.name}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Date:</span>
+                    <span className="font-medium">{selectedDate && new Date(selectedDate).toLocaleDateString()}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Time:</span>
+                    <span className="font-medium">{selectedTime}</span>
+                  </div>
+                </div>
+              </div>
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button onClick={() => window.location.href = '/dashboard'}>
+                  <Calendar className="mr-2 h-5 w-5" />
                   View Dashboard
                 </Button>
                 <Button variant="outline" onClick={() => window.location.href = '/'}>
+                  <ArrowLeft className="mr-2 h-5 w-5" />
                   Back to Home
                 </Button>
               </div>
             </div>
           )}
 
-          {/* Navigation Buttons - Only show for steps 1-3 */}
-          {currentStep < 4 && (
+          {/* Navigation Buttons - Only show for steps 1-3 and not loading */}
+          {currentStep < 4 && !isLoading && (
             <div className="flex justify-between mt-8">
               <Button
                 variant="outline"
