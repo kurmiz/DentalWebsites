@@ -33,7 +33,7 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook', color: 'hover:bg-blue-600', bgColor: 'bg-blue-500' },
+    { icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61574498425766', label: 'Facebook', color: 'hover:bg-blue-600', bgColor: 'bg-blue-500' },
     { icon: Twitter, href: '#', label: 'Twitter', color: 'hover:bg-sky-500', bgColor: 'bg-sky-400' },
     { icon: Instagram, href: '#', label: 'Instagram', color: 'hover:bg-pink-600', bgColor: 'bg-gradient-to-r from-purple-500 to-pink-500' },
     { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'hover:bg-blue-700', bgColor: 'bg-blue-600' },
@@ -135,7 +135,7 @@ const Footer = () => {
                 <div>
                   <h4 className="font-semibold text-white mb-1">Address</h4>
                   <p className="text-gray-300 leading-relaxed">
-                    Buddhachowk, Kathmandu<br />
+                    Buddha chowk, Bhairahawa<br />
                     Nepal
                   </p>
                 </div>
@@ -148,16 +148,16 @@ const Footer = () => {
                 <div>
                   <h4 className="font-semibold text-white mb-1">Phone</h4>
                   <a
-                    href="tel:+977-1-4567890"
+                    href="tel:+977-9864467519"
                     className="text-gray-300 hover:text-green-400 transition-colors duration-200 font-medium block"
                   >
-                    +977-1-4567890
+                    +977 9864467519
                   </a>
                   <a
-                    href="tel:+977-9876543210"
+                    href="tel:071-5745194"
                     className="text-gray-300 hover:text-green-400 transition-colors duration-200 font-medium block text-sm"
                   >
-                    +977-9876543210 (Emergency)
+                    071-5745194 (Tel)
                   </a>
                 </div>
               </div>
@@ -184,9 +184,7 @@ const Footer = () => {
                 <div>
                   <h4 className="font-semibold text-white mb-1">Hours</h4>
                   <div className="text-gray-300 space-y-1">
-                    <p className="font-medium">Mon - Fri: <span className="text-green-400">9:00 AM - 6:00 PM</span></p>
-                    <p className="font-medium">Saturday: <span className="text-yellow-400">9:00 AM - 4:00 PM</span></p>
-                    <p className="font-medium">Sunday: <span className="text-red-400">Closed</span></p>
+                    <p className="font-medium">Sunday - Saturday: <span className="text-green-400">9:00 AM - 6:00 PM</span></p>
                   </div>
                 </div>
               </div>
@@ -201,9 +199,8 @@ const Footer = () => {
               © {currentYear} Subha Dental Care. All rights reserved.
             </div>
             <div className="flex items-center space-x-1 text-gray-400 text-sm">
-              <span>Made with</span>
-              <Heart className="h-4 w-4 text-red-500 fill-current" />
-              <span>for better smiles</span>
+              <span>Made by</span>
+              <span className="text-primary-400 font-semibold">Abhesh Kurmi</span>
             </div>
             <div className="flex space-x-6 text-sm">
               <Link to="/privacy" className="text-gray-400 hover:text-primary-400 transition-colors duration-200">

@@ -65,14 +65,14 @@ const Contact = () => {
     {
       icon: MapPin,
       title: 'Address',
-      details: ['Buddhachowk, Kathmandu', 'Nepal'],
+      details: ['Buddha chowk, Bhairahawa', 'Nepal'],
       link: 'https://maps.google.com'
     },
     {
       icon: Phone,
       title: 'Phone',
-      details: ['+977-1-4567890', '+977-9876543210'],
-      link: 'tel:+977-1-4567890'
+      details: ['+977 9864467519', '071-5745194'],
+      link: 'tel:+977-9864467519'
     },
     {
       icon: Mail,
@@ -83,7 +83,7 @@ const Contact = () => {
     {
       icon: Clock,
       title: 'Hours',
-      details: ['Mon - Fri: 9:00 AM - 6:00 PM', 'Sat: 9:00 AM - 4:00 PM', 'Sun: Closed'],
+      details: ['Sunday - Saturday: 9:00 AM - 6:00 PM'],
       link: null
     }
   ];
