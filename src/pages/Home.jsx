@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
@@ -20,8 +20,10 @@ import ServiceCard from '../components/home/ServiceCard';
 import TestimonialCard from '../components/home/TestimonialCard';
 import StatsSection from '../components/home/StatsSection';
 import CredentialsSection from '../components/home/CredentialsSection';
+import ServiceDetailModal from '../components/modals/ServiceDetailModal';
 import { DentalCareVideo } from '../components/ui/VideoPlayer';
 import { SmileTransformations } from '../components/ui/GifPlayer';
+import { servicesData } from '../data/servicesData';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -30,6 +32,9 @@ import certificateImage from '../images/certificate.jpg';
 import patientImage from '../images/patientimage.jpg';
 
 const Home = () => {
+  const [selectedService, setSelectedService] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -37,58 +42,22 @@ const Home = () => {
     });
   }, []);
 
-  const services = [
-    {
-      icon: '🦷',
-      title: 'Dental Checkup',
-      description: 'Comprehensive oral health examination and professional cleaning to maintain optimal dental health',
-      price: 'From $80',
-      image: certificateImage,
-      alt: 'Professional dental checkup examination with dentist using modern dental tools and equipment',
-      featured: true
-    },
-    {
-      icon: '📷',
-      title: 'Dental X-ray (RVG)',
-      description: 'Advanced digital radiography for accurate diagnosis and treatment planning',
-      price: 'From $50',
-      image: patientImage,
-      alt: 'Digital dental X-ray machine and radiography equipment for accurate dental diagnosis'
-    },
-    {
-      icon: '✨',
-      title: 'Scaling & Polishing',
-      description: 'Professional teeth cleaning and plaque removal for healthier gums and brighter smile',
-      price: 'From $120',
-      image: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=400&h=300&fit=crop&crop=center&auto=format&q=80',
-      alt: 'Professional dental scaling and polishing procedure for teeth cleaning and plaque removal',
-      featured: true
-    },
-    {
-      icon: '🔧',
-      title: 'Dental Restoration',
-      description: 'Expert fillings, crowns, and restorative treatments to repair damaged teeth',
-      price: 'From $200',
-      image: 'https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=400&h=300&fit=crop&crop=center&auto=format&q=80',
-      alt: 'Dental restoration procedure showing cavity filling and tooth repair treatment'
-    },
-    {
-      icon: '🦷',
-      title: 'Dental Extraction',
-      description: 'Safe and painless tooth removal procedures with advanced pain management',
-      price: 'From $150',
-      image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=400&h=300&fit=crop&crop=center&auto=format&q=80',
-      alt: 'Safe and painless dental extraction procedure with modern dental instruments'
-    },
-    {
-      icon: '👑',
-      title: 'Crown & Bridge',
-      description: 'Custom-made crowns and bridges for natural-looking tooth restoration',
-      price: 'From $800',
-      image: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=300&fit=crop&crop=center&auto=format&q=80',
-      alt: 'Custom dental crown and bridge work showing natural-looking tooth restoration'
-    }
-  ];
+  const handleLearnMore = (service) => {
+    setSelectedService(service);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedService(null);
+  };
+
+  const handleBookNow = (service) => {
+    window.location.href = `/book-appointment?service=${encodeURIComponent(service.title)}`;
+  };
+
+  // Use the first 6 services for the homepage
+  const services = servicesData.slice(0, 6);
 
   const testimonials = [
     {
@@ -286,7 +255,7 @@ const Home = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {services.map((service, index) => (
               <motion.div
-                key={index}
+                key={service.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -300,6 +269,9 @@ const Home = () => {
                   alt={service.alt}
                   featured={service.featured}
                   delay={index * 0.1}
+                  serviceData={service}
+                  onLearnMore={handleLearnMore}
+                  onBookNow={handleBookNow}
                 />
               </motion.div>
             ))}
@@ -817,6 +789,13 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Service Detail Modal */}
+      <ServiceDetailModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        service={selectedService}
+      />
     </div>
   );
 };

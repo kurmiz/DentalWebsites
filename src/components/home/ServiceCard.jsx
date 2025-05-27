@@ -3,8 +3,35 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Calendar, Star } from 'lucide-react';
 import { Button } from '../ui/Button';
 
-const ServiceCard = ({ icon, title, description, price, image, alt, delay = 0, featured = false }) => {
+const ServiceCard = ({
+  icon,
+  title,
+  description,
+  price,
+  image,
+  alt,
+  delay = 0,
+  featured = false,
+  onLearnMore,
+  onBookNow,
+  serviceData
+}) => {
   const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleLearnMore = () => {
+    if (onLearnMore && serviceData) {
+      onLearnMore(serviceData);
+    }
+  };
+
+  const handleBookNow = () => {
+    if (onBookNow) {
+      onBookNow(serviceData);
+    } else {
+      // Default booking behavior
+      window.location.href = `/book-appointment?service=${encodeURIComponent(title)}`;
+    }
+  };
 
   return (
     <motion.div
@@ -81,6 +108,7 @@ const ServiceCard = ({ icon, title, description, price, image, alt, delay = 0, f
             variant="outline"
             size="sm"
             className="flex-1 group/btn interactive-glow-cool"
+            onClick={handleLearnMore}
           >
             Learn More
             <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
@@ -89,6 +117,7 @@ const ServiceCard = ({ icon, title, description, price, image, alt, delay = 0, f
             variant="primary"
             size="sm"
             className="flex-1 interactive-glow"
+            onClick={handleBookNow}
           >
             <Calendar className="mr-2 h-4 w-4" />
             Book Now
