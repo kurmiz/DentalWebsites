@@ -15,6 +15,7 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Chatbot from './components/Chatbot/Chatbot';
 import ScrollToTop from './components/common/ScrollToTop';
+import BackendStatus from './components/BackendStatus';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Footer />
             <Chatbot />
             <ScrollToTop />
+            <BackendStatus />
             <Toaster
               position="top-right"
               toastOptions={{
